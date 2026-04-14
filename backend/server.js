@@ -294,11 +294,11 @@ app.post('/generate-pdf', async (req, res) => {
     
     // 1. Fetch content by loading the page in Puppeteer (Notion is JS-heavy SPA)
     console.log(`Fetching Notion URL: ${url}`);
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
     
     // Wait for Notion's content blocks to render
     try {
-      await page.waitForSelector('[data-block-id]', { timeout: 10000 });
+      await page.waitForSelector('.notion-page-content, [data-block-id]', { timeout: 20000 });
     } catch(err) {
       // If we timeout, it might be a private page showing a login screen, or an empty page.
       const html = await page.content();
