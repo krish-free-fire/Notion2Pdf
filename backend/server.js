@@ -319,7 +319,7 @@ app.post('/generate-pdf', async (req, res) => {
     const pdfHtml = buildPDFHtml(content);
 
     // 4. Generate PDF using the same page instance
-    await page.setContent(pdfHtml, { waitUntil: 'networkidle0', timeout: 20000 });
+    await page.setContent(pdfHtml, { waitUntil: 'networkidle2', timeout: 60000 });
 
     const pdfBuffer = await page.pdf({
       format: 'A4',
