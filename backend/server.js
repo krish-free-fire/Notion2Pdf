@@ -281,14 +281,20 @@ app.post('/generate-pdf', async (req, res) => {
     browser = await puppeteer.launch({
       headless: 'new',
       executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: [
+        '--no-sandbox', 
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--disable-software-rasterizer'
+      ],
     });
 
     const page = await browser.newPage();
     
     // 1. Fetch content by loading the page in Puppeteer (Notion is JS-heavy SPA)
     console.log(`Fetching Notion URL: ${url}`);
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
     
     // Wait for Notion's content blocks to render
     try {
