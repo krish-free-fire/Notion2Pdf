@@ -11,9 +11,6 @@ RUN npm ci
 
 COPY . .
 
-# Set environment variables for Puppeteer cache inside docker
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 
 # Non-root user comes with the image
 USER pptruser

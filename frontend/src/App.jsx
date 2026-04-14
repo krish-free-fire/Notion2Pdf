@@ -99,7 +99,7 @@ export default function App() {
     setErrorMsg('')
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001'
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://notion2pdf-backend.onrender.com'
       const response = await fetch(`${apiUrl}/generate-pdf`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
